@@ -5,25 +5,25 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.github.offile.activityresult.EasyActivityResult
 import com.github.offile.activityresult.sample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private val easyActivityResult = EasyActivityResult(this)
+    private lateinit var easyActivityResult: EasyActivityResult
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // use ViewBinding
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.startActivityForResult.setOnClickListener {
-            onClickStartActivityForResult()
-        }
-        binding.requestPermissions.setOnClickListener {
-            onClickRequestPermissions()
-        }
+        // create instance
+        easyActivityResult = EasyActivityResult.with(this)
+        // set click listener
+        binding.startActivityForResult.setOnClickListener { onClickStartActivityForResult() }
+        binding.requestPermissions.setOnClickListener { onClickRequestPermissions() }
     }
 
     private fun onClickStartActivityForResult() {

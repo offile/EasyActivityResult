@@ -7,11 +7,20 @@ import androidx.core.util.isEmpty
  * Manage requestCode and callbacks
  */
 internal class CallbackManager<T> {
+    /**
+     * By default only one callback needs to be saved
+     */
     private val callbacks: SparseArray<T> = SparseArray(1)
+
+    /**
+     * index of current request code
+     */
     private var requestCodeIndex = 0
 
     /**
-     * Generate a new requestCode
+     * Generate a new requestCode,
+     * If there is only one callback, then the request code is 0,
+     * otherwise it is accumulated according to the index.
      */
     private fun nextRequestCode(): Int{
         return if(callbacks.isEmpty()){
@@ -29,7 +38,7 @@ internal class CallbackManager<T> {
      * put a callback
      * @return the request code corresponding to this callback
      */
-    fun put(callback: T): Int{
+    @Synchronized fun put(callback: T): Int{
         val requestCode = nextRequestCode()
         callbacks.put(requestCode, callback)
         return requestCode
@@ -38,7 +47,7 @@ internal class CallbackManager<T> {
     /**
      * Consume the callback corresponding to the request code
      */
-    fun consume(requestCode: Int): T?{
+    @Synchronized fun consume(requestCode: Int): T?{
         val callback: T? = callbacks.get(requestCode)
         callbacks.remove(requestCode)
         return callback
@@ -47,7 +56,7 @@ internal class CallbackManager<T> {
     /**
      * remove all callback
      */
-    fun clear(){
+    @Synchronized fun clear(){
         callbacks.clear()
     }
 }

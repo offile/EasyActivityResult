@@ -2,7 +2,6 @@ package com.github.offile.activityresult
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
 import com.github.offile.activityresult.callback.ActivityResultCallback
 import com.github.offile.activityresult.callback.PermissionsResultCallback
@@ -19,7 +18,6 @@ class ProxyFragment : Fragment() {
         retainInstance = true
     }
 
-    @MainThread
     fun startActivityForResult(intent: Intent, options: Bundle?, callback: ActivityResultCallback) {
         val requestCode = activityResultCallbacks.put(callback)
         startActivityForResult(intent, requestCode, options)
