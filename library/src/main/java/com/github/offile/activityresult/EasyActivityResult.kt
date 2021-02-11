@@ -45,7 +45,7 @@ class EasyActivityResult private constructor(private val fragmentManager: Fragme
     /**
      * Only one ProxyFragment exists in a FragmentManager
      */
-    private val fragment: ProxyFragment
+    val fragment: ProxyFragment
 
     init {
         val proxyFragment = fragmentManager.findFragmentByTag(TAG)

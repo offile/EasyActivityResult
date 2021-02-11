@@ -18,7 +18,7 @@ class ProxyFragment : Fragment() {
         retainInstance = true
     }
 
-    fun startActivityForResult(intent: Intent, options: Bundle?, callback: ActivityResultCallback) {
+    internal fun startActivityForResult(intent: Intent, options: Bundle?, callback: ActivityResultCallback) {
         val requestCode = activityResultCallbacks.put(callback)
         startActivityForResult(intent, requestCode, options)
     }
@@ -29,7 +29,7 @@ class ProxyFragment : Fragment() {
         callback?.onActivityResult(resultCode, data)
     }
 
-    fun requestPermissions(permissions: Array<out String>, callback: PermissionsResultCallback){
+    internal fun requestPermissions(permissions: Array<out String>, callback: PermissionsResultCallback){
         val requestCode = permissionsResultCallbacks.put(callback)
         requestPermissions(permissions, requestCode)
     }
