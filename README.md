@@ -38,7 +38,7 @@ dependencies {
 
 Create a `EasyActivityResult` instance :
 ```kotlin
-val easyActivityResult = EasyActivityResult(this) // where this is an Activity or Fragment instance
+val easyActivityResult = EasyActivityResult.with(this) // where this is an Activity or Fragment instance
 ```
 
 use `startActivityForResult` :
