@@ -12,7 +12,7 @@ import com.github.offile.activityresult.callback.PermissionsResultCallback
 /**
  * Use this class to receive activity result in callback
  */
-class ActivityResultHelper {
+open class EasyActivityResult {
 
     companion object {
         /**
@@ -20,7 +20,7 @@ class ActivityResultHelper {
          * @see ProxyFragment
          * @see FragmentManager
          */
-        const val TAG = "ActivityResultHelper\$ProxyFragment"
+        const val TAG = "EasyActivityResult\$ProxyFragment"
     }
 
     private lateinit var fragmentManager: FragmentManager

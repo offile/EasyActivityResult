@@ -6,12 +6,12 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.github.offile.activityresult.ActivityResultHelper
+import com.github.offile.activityresult.EasyActivityResult
 import com.github.offile.activityresult.sample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private val activityResultHelper = ActivityResultHelper(this)
+    private val easyActivityResult = EasyActivityResult(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun onClickStartActivityForResult() {
         val intent = Intent(this, ResultActivity::class.java)
-        activityResultHelper.startActivityForResult(intent){ resultCode, data ->
+        easyActivityResult.startActivityForResult(intent){ resultCode, data ->
             when(resultCode){
                 RESULT_OK -> {
                     val value = data?.getStringExtra("data")
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onClickRequestPermissions() {
-        activityResultHelper.requestPermissions(
+        easyActivityResult.requestPermissions(
             Manifest.permission.CALL_PHONE,
             Manifest.permission.CAMERA
         ){ permissions, grantResults ->
