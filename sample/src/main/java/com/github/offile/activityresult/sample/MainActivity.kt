@@ -11,15 +11,14 @@ import com.github.offile.activityresult.sample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var easyActivityResult: EasyActivityResult
+    // create instance
+    private val easyActivityResult = EasyActivityResult.with(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // use ViewBinding
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        // create instance
-        easyActivityResult = EasyActivityResult.with(this)
         // set click listener
         binding.startActivityForResult.setOnClickListener { onClickStartActivityForResult() }
         binding.requestPermissions.setOnClickListener { onClickRequestPermissions() }

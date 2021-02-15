@@ -2,12 +2,12 @@ package com.github.offile.activityresult
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.github.offile.activityresult.callback.ActivityResultCallback
 import com.github.offile.activityresult.callback.PermissionsResultCallback
+import com.github.offile.activityresult.util.HandleUtil
 
 /**
  * Call the with method to get an instance
@@ -45,17 +45,19 @@ class EasyActivityResult private constructor(private val fragmentManager: Fragme
     /**
      * Only one ProxyFragment exists in a FragmentManager
      */
-    val fragment: ProxyFragment
-
-    init {
-        val proxyFragment = fragmentManager.findFragmentByTag(TAG)
-        fragment = if (proxyFragment != null) {
-            proxyFragment as ProxyFragment
-        } else {
-            ProxyFragment().also {
-                fragmentManager.beginTransaction()
-                    .add(it, TAG)
-                    .commitNow()
+    val fragment: ProxyFragment by lazy {
+        synchronized(fragmentManager){
+            val proxyFragment = fragmentManager.findFragmentByTag(TAG)
+            if (proxyFragment != null) {
+                proxyFragment as ProxyFragment
+            } else {
+                ProxyFragment().also {
+                    HandleUtil.syncRunOnUiThread {
+                        fragmentManager.beginTransaction()
+                            .add(it, TAG)
+                            .commitNow()
+                    }
+                }
             }
         }
     }
