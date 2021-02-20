@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.github.offile.activityresult.callback.ActivityResultCallback
 import com.github.offile.activityresult.callback.PermissionsResultCallback
-import com.github.offile.activityresult.util.HandleUtil
+import com.github.offile.activityresult.util.ThreadUtil
 
 /**
  * Call the with method to get an instance
@@ -45,14 +45,14 @@ class EasyActivityResult private constructor(private val fragmentManager: Fragme
     /**
      * Only one ProxyFragment exists in a FragmentManager
      */
-    val fragment: ProxyFragment by lazy {
+    private val fragment: ProxyFragment by lazy {
         synchronized(fragmentManager){
             val proxyFragment = fragmentManager.findFragmentByTag(TAG)
             if (proxyFragment != null) {
                 proxyFragment as ProxyFragment
             } else {
                 ProxyFragment().also {
-                    HandleUtil.syncRunOnUiThread {
+                    ThreadUtil.syncRunOnUiThread {
                         fragmentManager.beginTransaction()
                             .add(it, TAG)
                             .commitNow()

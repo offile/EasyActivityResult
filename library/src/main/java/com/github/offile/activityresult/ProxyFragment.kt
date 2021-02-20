@@ -10,7 +10,7 @@ import com.github.offile.activityresult.callback.PermissionsResultCallback
 /**
  * call the method by this fragment proxy
  */
-class ProxyFragment : Fragment() {
+internal class ProxyFragment : Fragment() {
     private val activityResultCallbacks = CallbackManager<ActivityResultCallback>()
     private val permissionsResultCallbacks = CallbackManager<PermissionsResultCallback>()
 
