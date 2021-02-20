@@ -60,8 +60,8 @@ easyActivityResult.requestPermissions(
 ```
 
 ## LICENSE
-
-   Copyright [2021] [offile]
+```
+   Copyright 2021 offile
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -74,3 +74,4 @@ easyActivityResult.requestPermissions(
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+```
